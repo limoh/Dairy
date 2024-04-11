@@ -1,0 +1,73 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Prediction Results</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Additional custom styles go here */
+        h1 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        h3 {
+            font-size: 14px;
+            font-weight: bold;
+            margin-top: 30px;
+        }
+        p {
+            font-size: 18px;
+        }
+        ul {
+            font-size: 18px;
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 5px;
+        }
+        .impressive-heading {
+            font-size: 40px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .navbar {
+            height: 50px; /* Set the fixed height for the Navbar */
+            margin-top: 20px;
+            margin-bottom: 40px;
+            background-color: #E9FFDB;
+            border-bottom: 1px solid #ACDF87 ;
+        }
+        .navbar-logo {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+            <h4 style="margin-top: 15px;" class="navbar-text impressive-heading">A Model To Predict Milk Production For Dairy Farmers</h4>
+            <a class="navbar-brand" href="#">
+                <img src="{% static 'images/logo.png' %}" alt="Logo" height="100" width="100" class="mr-2">
+            </a>
+            
+        </div>
+    </nav>
+    <div class="container">
+        <h1 class="mt-4">Prediction Results</h1>
+
+        {% if error_message %}
+        <p>{{ error_message }}</p>
+        {% else %}
+            <h1 class="mt-4">Prediction Results for {{ selected_single_date }}</h1>
+            <p>Total Weight: {{ total_weight }} kg</p>
+        {% endif %}
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

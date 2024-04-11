@@ -1,0 +1,6 @@
+{
+    "name": "phpmailer/phpmailer",
+    "type": "phpmailer",
+    "license": "MIT",
+    "require": {}
+}

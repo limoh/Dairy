@@ -1,0 +1,79 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Predict</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .impressive-heading {
+            font-size: 40px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .navbar {
+            height: 50px; /* Set the fixed height for the Navbar */
+            margin-top: 20px;
+            margin-bottom: 40px;
+            background-color: #E9FFDB;
+            border-bottom: 1px solid #ACDF87 ;
+        }
+        .navbar-logo {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+            <h4 style="margin-top: 15px;" class="navbar-text impressive-heading">A Model To Predict Milk Production For Dairy Farmers</h4>
+            <a class="navbar-brand" href="#">
+                <img src="{% static 'images/logo.png' %}" alt="Logo" height="100" width="100" class="mr-2">
+            </a>
+            
+        </div>
+    </nav>
+    <div class="container">
+     
+  
+        <!-- Company's Part -->
+        <div class="row mb-4">
+            <!-- Date Range Prediction -->
+            <div class="col-md-6">
+                <h3>Predict for Creamery - Date Range</h3>
+                <form method="post" action="{% url 'predict:dairy_prediction_view' %}">
+                    {% csrf_token %}
+                    <div class="form-group mb-3">
+                        <label for="start_date_company">Start Date (Company):</label>
+                        <input type="date" name="start_date" id="start_date_company" class="form-control">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="end_date_company">End Date (Company):</label>
+                        <input type="date" name="end_date" id="end_date_company" class="form-control">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Predict</button>
+                </form>
+            </div>
+
+            <!-- Single Date Prediction -->
+            <div class="col-md-6">
+                <h3>Predict for Creamery - Single Date</h3>
+                <form method="post" action="{% url 'predict:single_date_dairy_predict_view' %}">
+                    {% csrf_token %}
+                    <div class="form-group mb-3">
+                        <label for="single_date_company">Select Date:</label>
+                        <input type="date" name="single_date" id="single_date_company" class="form-control">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Predict</button>
+                </form>
+            </div>
+        </div>
+          <hr>
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

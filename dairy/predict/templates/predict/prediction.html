@@ -1,0 +1,102 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Prediction Results</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Additional custom styles go here */
+        h1 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        h3 {
+            font-size: 14px;
+            font-weight: bold;
+            margin-top: 30px;
+        }
+        p {
+            font-size: 18px;
+        }
+        ul {
+            font-size: 18px;
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 5px;
+        }
+        .impressive-heading {
+            font-size: 40px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .navbar {
+            height: 50px; /* Set the fixed height for the Navbar */
+            margin-top: 20px;
+            margin-bottom: 40px;
+            background-color: #E9FFDB;
+            border-bottom: 1px solid #ACDF87 ;
+        }
+        .navbar-logo {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+            <h4 style="margin-top: 15px;" class="navbar-text impressive-heading">A Model To Predict Milk Production For Dairy Farmers</h4>
+            <a class="navbar-brand" href="#">
+                <img src="{% static 'images/logo.png' %}" alt="Logo" height="100" width="100" class="mr-2">
+            </a>
+            
+        </div>
+    </nav>
+
+    <div class="container">
+        {% if f_name %}  {# Individual Farmer Prediction Results #}
+            <h1 class="mt-4">Prediction Results for Farmer: {{ f_name }}</h1>
+            <h3>Selected Date Range:</h3>
+            <p>Start Date: {{ selected_start_date }}</p>
+            <p>End Date: {{ selected_end_date }}</p>
+
+            {% if forecasts %}
+                <h3>Predicted Forecasts:</h3>
+                <ul>
+                {% for date, forecast_value in forecasts %}
+                    <li>{{ date }} - {{ forecast_value }}</li>
+                {% endfor %}
+                </ul>
+            {% else %}
+                <p>No forecasts available for the selected farmer.</p>
+            {% endif %}
+
+        {% else %}  {# Creamery-wide Prediction Results #}
+            <h1 class="mt-4">Prediction Results for Whole Creamery</h1>
+            <h3>Selected Date Range:</h3>
+            <p>Start Date: {{ creamery_selected_start_date }}</p>
+            <p>End Date: {{ creamery_selected_end_date }}</p>
+
+            {% if creamery_forecasts %}
+                <h3>Predicted Forecasts:</h3>
+                <ul>
+                {% for date, forecast_value in creamery_forecasts %}
+                    <li>{{ date }} - {{ forecast_value }}</li>
+                {% endfor %}
+                </ul>
+            {% else %}
+                <p>No forecasts available for the entire creamery.</p>
+            {% endif %}
+
+        {% endif %}
+    </div>
+  
+</body>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+</html>
